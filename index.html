@@ -33,9 +33,9 @@
         }
 
         .audio-item {
-            background-color: #fff;
+            background-color: #7f8c8d; /* Couleur de fond neutre par défaut */
             margin: 10px;
-            padding: 15px;
+            padding: 20px;
             border-radius: 10px;
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
             width: 250px;
@@ -43,18 +43,19 @@
             opacity: 0;
             transform: translateY(50px);
             animation: fadeInUp 0.6s forwards;
+            transition: background-color 0.3s ease;
         }
 
-        .audio-item img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .audio-item:hover {
+            background-color: #16a085; /* Couleur au survol */
+            cursor: pointer;
         }
 
-        .audio-item img:hover {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        .audio-item h3 {
+            margin: 0;
+            color: #fff;
+            font-size: 18px;
+            margin-bottom: 10px;
         }
 
         audio {
@@ -78,6 +79,11 @@
                 transform: translateY(0);
             }
         }
+
+        /* Styles de couleur pour chaque vignette */
+        .color-1 { background-color: #3498db; } /* Bleu */
+        .color-2 { background-color: #e74c3c; } /* Rouge */
+        .color-3 { background-color: #f39c12; } /* Orange */
     </style>
 </head>
 <body>
@@ -91,30 +97,26 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const audioFiles = [
-                { title: "Piste 1", url: "audio/piste1.mp3", image: "images/image1.jpg" },
-                { title: "Piste 2", url: "audio/piste2.mp3", image: "images/image2.jpg" },
-                { title: "Piste 3", url: "audio/piste3.mp3", image: "images/image3.jpg" }
+                { title: "Piste 1", url: "audio/piste1.mp3", colorClass: "color-1" },
+                { title: "Piste 2", url: "audio/piste2.mp3", colorClass: "color-2" },
+                { title: "Piste 3", url: "audio/piste3.mp3", colorClass: "color-3" }
             ];
 
             const audioList = document.getElementById('audio-list');
 
             audioFiles.forEach(function(audio, index) {
                 const audioItem = document.createElement('div');
-                audioItem.classList.add('audio-item');
+                audioItem.classList.add('audio-item', audio.colorClass); // Applique la couleur
+
                 audioItem.style.animationDelay = `${index * 0.2}s`; // Delay for animation
 
                 const title = document.createElement('h3');
                 title.textContent = audio.title;
 
-                const img = document.createElement('img');
-                img.src = audio.image;
-                img.alt = audio.title;
-
                 const audioElement = document.createElement('audio');
                 audioElement.setAttribute('controls', 'true');
                 audioElement.src = audio.url;
 
-                audioItem.appendChild(img);
                 audioItem.appendChild(title);
                 audioItem.appendChild(audioElement);
 

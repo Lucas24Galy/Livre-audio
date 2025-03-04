@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Site de Pistes Audio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        #audio-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .audio-item {
+            background-color: #fff;
+            margin: 10px;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 200px;
+            text-align: center;
+        }
+
+        audio {
+            width: 100%;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Mes Pistes Audio</h1>
+        <div id="audio-list">
+            <!-- Les pistes audio seront ajoutées ici par JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioFiles = [
+                { title: "Piste 1", url: "audio/piste1.mp3" },
+                { title: "Piste 2", url: "audio/piste2.mp3" },
+                { title: "Piste 3", url: "audio/piste3.mp3" }
+            ];
+
+            const audioList = document.getElementById('audio-list');
+
+            audioFiles.forEach(function(audio) {
+                const audioItem = document.createElement('div');
+                audioItem.classList.add('audio-item');
+
+                const title = document.createElement('h3');
+                title.textContent = audio.title;
+
+                const audioElement = document.createElement('audio');
+                audioElement.setAttribute('controls', 'true');
+                audioElement.src = audio.url;
+
+                audioItem.appendChild(title);
+                audioItem.appendChild(audioElement);
+
+                audioList.appendChild(audioItem);
+            });
+        });
+    </script>
+</body>
+</html>
